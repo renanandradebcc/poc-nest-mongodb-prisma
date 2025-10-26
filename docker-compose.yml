@@ -1,21 +1,14 @@
-version: '3.8'
-
+version: '3'
 services:
   mongo:
-    image: mongo:latest         
+    image: mongo:latest
     container_name: nest-mongo-db
-    restart: unless-stopped     
-    
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
-  
+    restart: unless-stopped
     ports:
       - "27017:27017"
-      
     volumes:
       - mongo-data:/data/db
-
+    command: ["--replSet", "rs0"]
 volumes:
   mongo-data:
     driver: local
